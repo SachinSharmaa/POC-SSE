@@ -1,2 +1,2 @@
 # POC-SSE
-This repository contains implementation of Server Sent Events in Spring.
+This is a basic POC on implementation of Server Sent Events to send notifications in Spring Boot.

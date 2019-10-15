@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Server Notifications</title>
+<script>
+	function initialize() {
+		// const eventSource = new EventSource('http://localhost:9201/studio/v1/registerNotificationEmitter/Sachin');
+		const eventSource = new EventSource('http://localhost:9208/api/studio/v1/registerNotificationEmitter/Sachin/eventStream');
+		eventSource.onmessage = e => {
+			const msg = e.data;
+			document.getElementById("greet").innerHTML = msg;
+		};
+
+		eventSource.onopen = e => console.log('open');
+		eventSource.onerror = e => {
+			if (e.readyState == EventSource.CLOSED) {
+				console.log('close');
+			}
+			else {
+				console.log(e);
+			}
+		};
+
+		eventSource.addEventListener('second', function(e) {
+			console.log('second', e.data);
+		}, false);
+	}
+	window.onload = initialize;
+</script>
+</head>
+<body>
+	<div id="greet"></div>
+</body>
+</html>
